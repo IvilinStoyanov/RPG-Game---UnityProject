@@ -14,12 +14,11 @@ public class MummyController : MonoBehaviour
     //CapsuleCollider capsuleCollider;
     //public float atkDamage;
     //public float atkSpeed;
-
-
+    MummyController mummyController;
+    SphereCollider sphereCollider;
     private GameObject[] players;
-
     private bool isAttacked = false;
-
+    EnemyAttack enemyAttack;
     public float lookRaduis = 5f;
     Transform target;
     NavMeshAgent agent;
@@ -33,6 +32,9 @@ public class MummyController : MonoBehaviour
         currentHealth = totalHealth;
         //  target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        sphereCollider = GetComponent<SphereCollider>();
+        enemyAttack = GetComponent<EnemyAttack>();
+        mummyController = GetComponent<MummyController>();
     }
 
     private void Awake()
@@ -48,6 +50,7 @@ public class MummyController : MonoBehaviour
         if (distance <= lookRaduis)
         {
             anim.SetBool("isWalking", true);
+            anim.SetBool("isIdle", false);
             agent.SetDestination(target.position);
             if (distance <= agent.stoppingDistance)
             {
@@ -56,6 +59,12 @@ public class MummyController : MonoBehaviour
                 anim.SetBool("isWalking", false);
             }
         }
+        else
+        {
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isWalking", false);
+        }
+
     }
 
     void FaceTarget()
@@ -105,11 +114,16 @@ public class MummyController : MonoBehaviour
     private void Die()
     {
         dead = true;
+        enemyAttack.enabled = false;
+        mummyController.enabled = false;
+        //sphereCollider.enabled = false;
+        //sphereCollider.isTrigger = false;
+
         agent.speed = 0;
         anim.SetBool("isDead", true);
         anim.SetBool("isAttacked", false);
         anim.SetBool("isIdle", false);
-        anim.SetBool("isWalking", false);     
+        anim.SetBool("isWalking", false);
         DropLoot();
         foreach (GameObject go in players)
         {
@@ -117,13 +131,12 @@ public class MummyController : MonoBehaviour
         }
         GameObject.Destroy(this.gameObject, 15);
     }
-  
+
     IEnumerator RecoverFromHit()
     {
         yield return new WaitForSeconds(0.1f);
         anim.SetBool("isIdle", true);
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isAttacked", false);
-
     }
 }

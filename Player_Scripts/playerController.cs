@@ -106,7 +106,7 @@ public class playerController : MonoBehaviour
         GetEnemiesInRange();
         foreach (Transform enemy in enemiesInRange)
         {
-            MummyController mc = enemy.GetComponent<MummyController>();
+            EnemyController mc = enemy.GetComponent<EnemyController>();
             if (mc == null)
             {
                 continue;

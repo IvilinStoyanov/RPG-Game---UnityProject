@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = startingHealth;
     }
 
+    private void Start()
+    {
+        //TODO: IF DEAD REMOVE THIS FUNCTION
+        InvokeRepeating("RegenerationHealth", 0f, 8f);
+    }
 
     void Update()
     {
@@ -76,6 +81,11 @@ public class PlayerHealth : MonoBehaviour
             // ... it should die.
             Death();
         }
+    }
+
+    private void RegenerationHealth()
+    {
+        healthSlider.value += 5;
     }
 
 

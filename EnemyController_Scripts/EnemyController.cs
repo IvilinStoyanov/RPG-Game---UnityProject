@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class MummyController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public Animator anim;
     public float totalHealth;
@@ -14,7 +14,7 @@ public class MummyController : MonoBehaviour
     //CapsuleCollider capsuleCollider;
     //public float atkDamage;
     //public float atkSpeed;
-    MummyController mummyController;
+    EnemyController mummyController;
     SphereCollider sphereCollider;
     private GameObject[] players;
     private bool isAttacked = false;
@@ -34,7 +34,7 @@ public class MummyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         sphereCollider = GetComponent<SphereCollider>();
         enemyAttack = GetComponent<EnemyAttack>();
-        mummyController = GetComponent<MummyController>();
+        mummyController = GetComponent<EnemyController>();
     }
 
     private void Awake()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class playerController : MonoBehaviour
 {
     Animator anim;
@@ -21,7 +22,6 @@ public class playerController : MonoBehaviour
     public float attackDamage = 5f;
     public float attackSpeed;
     public float attackRange;
-    public float experience;
 
     private void Start()
     {
@@ -128,10 +128,7 @@ public class playerController : MonoBehaviour
 
     }
 
-    public void GetExperience(float exp)
-    {
-        experience += exp;
-    }
+   
 }
 
 

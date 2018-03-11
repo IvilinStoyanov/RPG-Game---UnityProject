@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 
-    public int startingHealth = 100;                            // The amount of health the player starts the game with.
+    public int totalHealth = 250;
+    private static int regenHealthPerSec = 5;
+
     public int currentHealth;                                   // The current health the player has.
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
@@ -17,11 +19,12 @@ public class PlayerHealth : MonoBehaviour
 
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    playerController playerMovement;                              // Reference to the player's movement.
+    playerController playerMovement;
+    playerLevelSystem playerLevelSystem;
+    // Reference to the player's movement.
     /*PlayerShooting playerShooting;  */                            // Reference to the PlayerShooting script.
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
-
 
     void Awake()
     {
@@ -30,13 +33,18 @@ public class PlayerHealth : MonoBehaviour
         //playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<playerController>();
         //playerShooting = GetComponentInChildren<PlayerShooting>();
-
+        playerLevelSystem = GetComponent<playerLevelSystem>();
+        healthSlider.value = totalHealth;
         // Set the initial health of the player.
-        currentHealth = startingHealth;
+        currentHealth = totalHealth;
+        BarScript.totalHealthBar = totalHealth;
+        BarScript.currentPlayerHealth = totalHealth;
+
     }
 
     private void Start()
     {
+       
         //TODO: IF DEAD REMOVE THIS FUNCTION
         InvokeRepeating("RegenerationHealth", 0f, 8f);
     }
@@ -60,6 +68,10 @@ public class PlayerHealth : MonoBehaviour
         damaged = false;
     }
 
+    public void TakeCurrentHealthAfterLevelUp(int totalHp)
+    {
+        totalHealth = totalHp;
+    }
 
     public void TakeDamage(int amount)
     {
@@ -83,11 +95,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void RegenerationHealth()
-    {
-        healthSlider.value += 5;
-    }
 
+    public void RegenerationHealth()
+    {
+        if(currentHealth < totalHealth)
+        {
+            currentHealth += regenHealthPerSec;
+            healthSlider.value += regenHealthPerSec;
+            BarScript.currentPlayerHealth = healthSlider.value;
+        }
+        
+    }
 
     void Death()
     {

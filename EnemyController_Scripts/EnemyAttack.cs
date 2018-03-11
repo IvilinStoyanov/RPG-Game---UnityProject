@@ -85,6 +85,7 @@ public class EnemyAttack : MonoBehaviour
         {
             // ... damage the player.
             playerHealth.TakeDamage(attackDamage);
+            BarScript.currentPlayerHealth = playerHealth.currentHealth;
             anim.SetBool("isAttacking", true);
           
             Debug.Log("Player Damaged");

@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     public float lookRaduis = 5f;
     Transform target;
     NavMeshAgent agent;
-    private bool dead;
+    public bool IsDead;
 
 
     // Use this for initialization
@@ -93,7 +93,7 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isAttacked", false);
         }
 
-        if (dead)
+        if (IsDead)
         {
             return;
         }
@@ -113,7 +113,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        dead = true;
+        IsDead = true;
         enemyAttack.enabled = false;
         mummyController.enabled = false;
         //sphereCollider.enabled = false;
@@ -127,7 +127,7 @@ public class EnemyController : MonoBehaviour
         DropLoot();
         foreach (GameObject go in players)
         {
-            go.GetComponent<playerController>().GetExperience(extGranted / players.Length);
+            go.GetComponent<playerLevelSystem>().GetExperience(extGranted / players.Length);
         }
         GameObject.Destroy(this.gameObject, 15);
     }

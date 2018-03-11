@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour {
 
         //CameraTarget.rotation = rotation;
 
-        float cameraX = transform.rotation.x;
+       // float cameraX = transform.rotation.x;
         //checks if right mouse button is pushed
 
         //checks if middle mouse button is pushed down

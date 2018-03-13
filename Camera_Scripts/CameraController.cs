@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour {
     public float MaxViewDistance = 15f;
     public float MinViewDistance = 1f;
     public int ZoomRate = 20;
-    private int lerpRate = 5;
     private float distance = 3f;
     private float desireDistance;
     private float correctedDistance;

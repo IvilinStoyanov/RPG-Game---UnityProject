@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     Animator anim;
     [Header("Movement")]
     private float movementSpeed;
-    private float rotSpeed = 3f;
+    private float rotSpeed = 6f;
     private float crouchSpeed = 0.03f;
 
     // private float jumpHeight = 200f;
@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Move script 
         var z = Input.GetAxis("Vertical") * movementSpeed;
         var y = Input.GetAxis("Horizontal") * rotSpeed;
 
@@ -43,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             movementSpeed = crouchSpeed;
-            //anim.SetBool("isRunning", false);
             anim.SetBool("isRunning", false);
             anim.SetBool("isWalkingBack", true);
         }
@@ -51,5 +49,6 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isWalkingBack", false);
         }
-    }  
+    }
 }
+

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
-
+public class CameraController : MonoBehaviour
+{
     public Transform CameraTarget;
     private float x = 0.0f;
     private float y = 0.0f;
@@ -40,11 +40,9 @@ public class CameraController : MonoBehaviour {
     // Update is called once per frame
     void LateUpdate()
     {
-
-
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(2))
         {/*0 mouse btn izq, 1 mouse btn der*/
-            y+= Input.GetAxis("Mouse Y") * mouseXSpeedMod;
+            y += Input.GetAxis("Mouse Y") * mouseXSpeedMod;
             x += Input.GetAxis("Mouse X") * mouseYSpeedMod;
         }
         //else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
@@ -87,7 +85,7 @@ public class CameraController : MonoBehaviour {
 
         //CameraTarget.rotation = rotation;
 
-       // float cameraX = transform.rotation.x;
+        // float cameraX = transform.rotation.x;
         //checks if right mouse button is pushed
 
         //checks if middle mouse button is pushed down
@@ -123,3 +121,5 @@ public class CameraController : MonoBehaviour {
         return Mathf.Clamp(angle, min, max);
     }
 }
+
+

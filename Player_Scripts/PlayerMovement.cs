@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     Animator anim;
     [Header("Movement")]
     private float movementSpeed;
@@ -51,4 +52,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
 

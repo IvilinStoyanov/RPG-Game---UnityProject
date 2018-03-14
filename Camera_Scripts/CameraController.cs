@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+
     public Transform CameraTarget;
     private float x = 0.0f;
     private float y = 0.0f;
@@ -37,6 +38,12 @@ public class CameraController : MonoBehaviour
         correctedDistance = distance;
     }
 
+    private void Update()
+    {
+        Vector3 targetPostition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        targetPostition = new Vector3(targetPostition.x, transform.position.y, targetPostition.z);
+        transform.LookAt(targetPostition);
+    }
     // Update is called once per frame
     void LateUpdate()
     {
@@ -121,5 +128,7 @@ public class CameraController : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 }
+
+
 
 

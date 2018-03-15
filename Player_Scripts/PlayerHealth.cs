@@ -14,13 +14,15 @@ public class PlayerHealth : MonoBehaviour
     public Image damageImage;                                  
     public AudioClip deathClip;                                
     public float flashSpeed = 5f;                              
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     
+    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     playerLevelSystem playerLevelSystem;
     Animator anim;                                             
     AudioSource playerAudio;                                   
-    PlayerMovement playerMovement;                                                                       
-                   
+    PlayerMovement playerMovement;
+
+    HealthFiller_Script healthFiller;
+
     bool isDead;                                                
     bool damaged;                                                  
 
@@ -77,10 +79,11 @@ public class PlayerHealth : MonoBehaviour
 
         // Reduce the current health by the damage amount.
         currentHealth -= amount;
+        //Set image filler to current health
 
         // Set the health bar's value to the current health.
         healthSlider.value = currentHealth;
-
+ 
         // Play the hurt sound effect.
         /* playerAudio.Play()*/
         ;

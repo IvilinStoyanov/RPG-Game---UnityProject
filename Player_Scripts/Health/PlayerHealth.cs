@@ -18,10 +18,8 @@ public class PlayerHealth : MonoBehaviour
 
     playerLevelSystem playerLevelSystem;
     Animator anim;                                             
-    AudioSource playerAudio;                                   
-    PlayerMovement playerMovement;
-
-    HealthFiller_Script healthFiller;
+    AudioSource playerAudio;
+    PlayerMotor playerMotor;
 
     bool isDead;                                                
     bool damaged;                                                  
@@ -31,8 +29,8 @@ public class PlayerHealth : MonoBehaviour
         // Setting up the references.
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
-        playerMovement = GetComponent<PlayerMovement>();
         playerLevelSystem = GetComponent<playerLevelSystem>();
+        playerMotor = GetComponent<PlayerMotor>();
         healthSlider.value = totalHealth;
         // Set the initial health of the player.
         currentHealth = totalHealth;
@@ -124,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
         //playerAudio.Play();
 
         // Turn off the movement and shooting scripts.
-        playerMovement.enabled = false;
+        playerMotor.enabled = false;
         //playerShooting.enabled = false;
     }
 }

@@ -47,9 +47,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(1))
         {/*0 mouse btn izq, 1 mouse btn der*/
-            y += Input.GetAxis("Mouse Y") * mouseXSpeedMod;
+          //  y += Input.GetAxis("Mouse Y") * mouseXSpeedMod;
             x += Input.GetAxis("Mouse X") * mouseYSpeedMod;
         }
         //else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
@@ -90,9 +90,10 @@ public class CameraController : MonoBehaviour
         transform.rotation = rotation;
         transform.position = position;
 
-        //CameraTarget.rotation = rotation;
+        CameraTarget.rotation = rotation;
 
-        // float cameraX = transform.rotation.x;
+
+        float cameraX = transform.rotation.x;
         //checks if right mouse button is pushed
 
         //checks if middle mouse button is pushed down

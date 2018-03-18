@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private List<Transform> enemiesInRange = new List<Transform>();
 
     Animator anim;
-    PlayerMovement playerMovement;
+    PlayerMotor playerMotor;
 
     EnemyController ec;
 
@@ -29,12 +29,13 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMotor = GetComponent<PlayerMotor>();
         ec = GetComponent<EnemyController>();
     }
 
     private void FixedUpdate()
     {
+       // GetEnemiesInRange();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -42,12 +43,18 @@ public class PlayerAttack : MonoBehaviour
             Attack();
             StartCoroutine(AttackCooldown());
         }
-        if ((Input.GetMouseButton(1)))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             attackType = 2;
             Attack();
             StartCoroutine(AttackCooldown());
             Debug.Log("Special Attack");
+        }
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+            attackType = 3;
+            Attack();
+            Debug.Log("Spring damage ON");
         }
 
     }
@@ -65,6 +72,11 @@ public class PlayerAttack : MonoBehaviour
         {
             anim.SetTrigger("SpecialAttack");
             Debug.Log(attackType);
+        }
+        if(attackType == 3)
+        {
+            anim.SetBool("isRunning", false);
+            anim.SetBool("Sprinting", true);
         }
         Debug.Log("Attacking");
 
@@ -101,9 +113,9 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         canAttack = false;
-        playerMovement.enabled = false;
+        playerMotor.enabled = false;
         yield return new WaitForSeconds(1 / attackSpeed);
-        playerMovement.enabled = true;
+        playerMotor.enabled = true;
         canAttack = true;
     }
 }

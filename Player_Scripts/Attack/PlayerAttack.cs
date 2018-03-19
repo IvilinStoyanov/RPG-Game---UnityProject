@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-       // GetEnemiesInRange();
+        // GetEnemiesInRange();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
             StartCoroutine(AttackCooldown());
             Debug.Log("Special Attack");
         }
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             attackType = 3;
             Attack();
@@ -73,10 +73,9 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("SpecialAttack");
             Debug.Log(attackType);
         }
-        if(attackType == 3)
+        if (attackType == 3)
         {
-            anim.SetBool("isRunning", false);
-            anim.SetBool("Sprinting", true);
+
         }
         Debug.Log("Attacking");
 
@@ -93,7 +92,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 continue;
             }
-            Debug.Log("Enemies in range -" +enemiesInRange.Count);
+            Debug.Log("Enemies in range -" + enemiesInRange.Count);
             ec.GetHit(attackDamage);
         }
     }

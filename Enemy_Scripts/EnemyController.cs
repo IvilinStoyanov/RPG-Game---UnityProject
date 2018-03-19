@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public Animator anim;
+    private Animator anim;
     public float totalHealth;
     public float currentHealth;
     public float extGranted;
@@ -22,6 +22,9 @@ public class EnemyController : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     public bool IsDead;
+    //Audio
+    public AudioClip deathClip;
+    AudioSource enemyAudio;
 
 
     // Use this for initialization
@@ -33,6 +36,7 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         enemyAttack = GetComponent<EnemyAttack>();
         anim = GetComponent<Animator>();
+        enemyAudio = GetComponent<AudioSource>();
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
@@ -98,10 +102,13 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        enemyAudio.clip = deathClip;
+        enemyAudio.Play();
+
         IsDead = true;
         enemyAttack.enabled = false;
         capsuleCollider.isTrigger = true;
-        agent.speed = 0;
+        agent.speed = 0;;
         anim.SetTrigger("isDead");
         DropLoot();
         foreach (GameObject go in players)

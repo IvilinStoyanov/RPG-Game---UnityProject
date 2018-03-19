@@ -7,7 +7,6 @@ using System;
 public class AudioManager : MonoBehaviour
 {
 
-
     public Sound[] sounds;
 
     // Use this for initialization
@@ -27,6 +26,8 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         Play("Theme");
+        Play("Rain");
+        Play("Wind");
     }
 
     public void Play(string name)

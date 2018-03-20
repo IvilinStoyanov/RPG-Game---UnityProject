@@ -14,8 +14,6 @@ public class PlayerAttack : MonoBehaviour
     Animator anim;
     PlayerMotor playerMotor;
 
-    EnemyController ec;
-
     private int attackType = 0;
 
 
@@ -30,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerMotor = GetComponent<PlayerMotor>();
-        ec = GetComponent<EnemyController>();
     }
 
     private void FixedUpdate()

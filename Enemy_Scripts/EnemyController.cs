@@ -48,13 +48,14 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        agent.SetDestination(target.position);
         float distance = Vector3.Distance(target.position, transform.position);
 
         if (distance <= lookRaduis)
         {
             //anim.SetBool("isWalking", true);
             //anim.SetBool("isIdle", false);
-            agent.SetDestination(target.position);
+           
             if (distance <= agent.stoppingDistance)
             {
                 FaceTarget();

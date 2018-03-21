@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // GetEnemiesInRange();
+         GetEnemiesInRange();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,6 +47,16 @@ public class PlayerAttack : MonoBehaviour
             StartCoroutine(AttackCooldown());
             Debug.Log("Special Attack");
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            attackType = 4;
+            Attack();
+            StartCoroutine(AttackCooldown());
+            Debug.Log("Rage");
+        }
+
+
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             attackType = 3;
@@ -70,9 +80,9 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("SpecialAttack");
             Debug.Log(attackType);
         }
-        if (attackType == 3)
+        if (attackType == 4)
         {
-
+            anim.SetTrigger("Rage");
         }
         Debug.Log("Attacking");
 

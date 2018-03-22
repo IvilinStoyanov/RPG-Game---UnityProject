@@ -37,11 +37,11 @@ public class ThrowAxe_Script : MonoBehaviour
         Debug.Log("Axe throwed");
 
        // Ray ray = new Ray(firePoint.position, firePoint.forward);
-        //RaycastHit hitinfo;
+        RaycastHit hitinfo;
 
-        //if(Physics.Raycast(ray, out hitinfo, 100))
-        //{
-        //    Destroy(hitinfo.collider.gameObject);
-        //}
+        if(Physics.Raycast(ray, out hitinfo, 100))
+        {
+            Destroy(hitinfo.collider.gameObject);
+        }
     }
 }

@@ -9,20 +9,20 @@ public class PlayerHealth : MonoBehaviour
     public int totalHealth = 250;
     private static int regenHealthPerSec = 5;
 
-    public float currentHealth;                                  
-    public Slider healthSlider;                                
-    public Image damageImage;                                  
-    public AudioClip deathClip;                                
-    public float flashSpeed = 5f;                              
+    public float currentHealth;
+    public Slider healthSlider;
+    public Image damageImage;
+    public AudioClip deathClip;
+    public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     playerLevelSystem playerLevelSystem;
-    Animator anim;                                             
+    Animator anim;
     AudioSource playerAudio;
     PlayerMotor playerMotor;
 
-    bool isDead;                                                
-    bool damaged;                                                  
+    bool isDead;
+    bool damaged;
 
     void Awake()
     {
@@ -31,11 +31,13 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerLevelSystem = GetComponent<playerLevelSystem>();
         playerMotor = GetComponent<PlayerMotor>();
+
         healthSlider.value = totalHealth;
         // Set the initial health of the player.
         currentHealth = totalHealth;
         BarScript.totalHealthBar = totalHealth;
-       BarScript.currentPlayerHealth = totalHealth;
+        BarScript.currentPlayerHealth = totalHealth;
+
 
     }
 
@@ -60,7 +62,6 @@ public class PlayerHealth : MonoBehaviour
             // ... transition the colour back to clear.
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-
         // Reset the damaged flag.
         damaged = false;
     }
@@ -81,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Set the health bar's value to the current health.
         healthSlider.value = currentHealth;
- 
+
         // Play the hurt sound effect.
         /* playerAudio.Play()*/
         ;
@@ -92,6 +93,7 @@ public class PlayerHealth : MonoBehaviour
             // ... it should die.
             Death();
         }
+        
     }
 
 
@@ -101,7 +103,7 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth += regenHealthPerSec;
             healthSlider.value += regenHealthPerSec;
-             BarScript.currentPlayerHealth = healthSlider.value;
+            BarScript.currentPlayerHealth = healthSlider.value;
         }
 
     }
@@ -115,11 +117,11 @@ public class PlayerHealth : MonoBehaviour
         //playerShooting.DisableEffects();
 
         // Tell the animator that the player is dead.
-        //anim.SetTrigger("Die");
+        anim.SetTrigger("PlayerDead");
 
         // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
-        //playerAudio.clip = deathClip;
-        //playerAudio.Play();
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
 
         // Turn off the movement and shooting scripts.
         playerMotor.enabled = false;

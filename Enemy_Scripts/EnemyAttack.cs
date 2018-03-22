@@ -66,7 +66,7 @@ public class EnemyAttack : MonoBehaviour
         if (playerHealth.currentHealth <= 0)
         {
             // ... tell the animator the player is dead.
-            //anim.SetTrigger("PlayerDead");
+          //  anim.SetTrigger("PlayerDead");
         }
     }
 
@@ -82,7 +82,6 @@ public class EnemyAttack : MonoBehaviour
             playerHealth.TakeDamage(attackDamage);
             BarScript.currentPlayerHealth = playerHealth.currentHealth;
             anim.SetTrigger("Attacking");
-
             Debug.Log("Player Damaged");
         }
     }

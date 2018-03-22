@@ -101,7 +101,7 @@ public class EnemyController : MonoBehaviour
         print("Wow");
     }
 
-    private void Die()
+    public void Die()
     {
         enemyAudio.clip = deathClip;
         enemyAudio.Play();

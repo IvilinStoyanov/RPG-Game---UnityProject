@@ -11,13 +11,16 @@ public class ThrowAxe_Script : MonoBehaviour
     private float fireRate = 1;
 
     [SerializeField]
-    [Range(1, 10)]
-    private int damage = 1;
+    [Range(50, 100)]
+    private int damage = 50;
 
     private float timer;
 
+    [SerializeField]
+    GameObject axe;
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         timer += Time.deltaTime;
         if(timer >= fireRate)
@@ -32,16 +35,24 @@ public class ThrowAxe_Script : MonoBehaviour
 
     private void ThrowAxe()
     {
-       Ray ray = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
-        Debug.Log("Axe throwed");
+        axe = Instantiate(axe, transform.position, transform.rotation) as GameObject;
+        var axeRb = axe.GetComponent<Rigidbody>();
 
-       // Ray ray = new Ray(firePoint.position, firePoint.forward);
-        RaycastHit hitinfo;
+        axeRb.AddForce(transform.forward * 1000);
 
-        if(Physics.Raycast(ray, out hitinfo, 100))
-        {
-            Destroy(hitinfo.collider.gameObject);
-        }
+
+
+        //Ray ray = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+        //Ray ray = new Vector3(transform.position, transform.rotation);
+        //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2f);
+        //Debug.Log("Axe throwed");
+
+        //Ray ray = new Ray(firePoint.position, firePoint.forward);
+        //RaycastHit hitinfo;
+
+        //if (Physics.Raycast(ray, out hitinfo, 100))
+        //{
+        //    Destroy(hitinfo.collider.gameObject);
+        //}
     }
 }
